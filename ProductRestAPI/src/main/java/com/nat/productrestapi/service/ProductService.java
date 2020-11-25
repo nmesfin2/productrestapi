@@ -8,7 +8,7 @@ import com.nat.productrestapi.model.Product;
 
 
 public interface ProductService {
-	public String createProduct(Product product);
+	public Product createProduct(Product product);
 	public Optional<Product> getProductById(int id);
 	public void deleteProduct(int id);
 	public Optional<List<Product>> getProducts();
