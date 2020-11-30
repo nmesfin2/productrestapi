@@ -1,5 +1,6 @@
 package com.nat.productrestapi.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,9 +41,13 @@ public class ProductController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public String deleteProductById(@PathVariable int id) {
+	public HashMap<String, Boolean> deleteProductById(@PathVariable int id) throws ResourceNotFoundException {
+		Product product =productService.getProductById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+		
 		productService.deleteProduct(id);
-		return "success";
+		HashMap<String, Boolean> hashMap = new HashMap<>();
+		hashMap.put("deleted", Boolean.TRUE);
+		return hashMap;
 	}
 	
 }
